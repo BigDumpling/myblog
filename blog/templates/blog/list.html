@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MyBlog</title>
+</head>
+<body>
+
+<div>
+    <ul>
+    <h4>所有栏目：</h4>
+        {% for value in context  %}
+        <li>名称：{{ value.name }}</li>
+        <li>创建时间：{{ value.create_time }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+</div>
+</body>
+</html>

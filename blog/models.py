@@ -1,10 +1,12 @@
+
 from django.contrib.auth.models import User
 from django.db import models
 
 
 # Create your models here.
+
+
 class Constant(models.Model):
-    id = models.BigAutoField(primary_key=True)
     status = models.IntegerField(default=1)
     param_key = models.CharField(max_length=32)
     param_name = models.CharField(max_length=64)
