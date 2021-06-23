@@ -137,6 +137,13 @@ LOGGING = {
         'handlers': ['console', 'file'],
         'level': 'DEBUG',
     },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['console', 'file'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+    },
 }
 
 # Internationalization
