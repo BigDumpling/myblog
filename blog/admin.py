@@ -46,3 +46,8 @@ class TuiAdmin(admin.ModelAdmin):
 @admin.register(Link)
 class LinkAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'link_url')
+
+
+@admin.register(Constant)
+class ConstantAdmin(admin.ModelAdmin):
+    list_display = ('id', 'status', 'param_key', 'param_name', 'param_value', 'remark', 'create_time', 'modify_time')

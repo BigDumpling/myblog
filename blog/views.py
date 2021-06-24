@@ -1,18 +1,25 @@
 import logging
 
-from django.http import HttpResponse
 from django.shortcuts import render
+from rest_framework import viewsets
 
+from .exception.blog_exception import UnSupportMethodException
 from .models import *
+from .response.rest_response import RestResponse
+from .serializers import ConstantSerializer
 
 logger = logging.getLogger(__name__)
 
 
 # Create your views here.
 
-def hello(request):
-    logger.info('----- hello -----')
-    return HttpResponse('Hello World')
+class ConstantViewSet(viewsets.ModelViewSet):
+    queryset = Constant.objects.all()
+    serializer_class = ConstantSerializer
+
+
+def index(request):
+    return render(request=request, template_name='blog/index.html')
 
 
 def list_category(request):
@@ -23,3 +30,11 @@ def list_category(request):
     }
     logger.info(context)
     return render(request=request, template_name='blog/list.html', context=context)
+
+
+def list_constant(request):
+    if request.method == 'GET':
+        constant = Constant.objects.all()
+        serializer = ConstantSerializer(constant, many=True)
+        return RestResponse(serializer.data)
+    raise UnSupportMethodException('不支持的HTTP请求')
