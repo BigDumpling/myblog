@@ -2,6 +2,8 @@ import logging
 
 from django.shortcuts import render
 from rest_framework import viewsets
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 from .exception.blog_exception import UnSupportMethodException
 from .models import *
@@ -32,9 +34,18 @@ def list_category(request):
     return render(request=request, template_name='blog/list.html', context=context)
 
 
-def list_constant(request):
+def list_constant_response(request):
     if request.method == 'GET':
         constant = Constant.objects.all()
         serializer = ConstantSerializer(constant, many=True)
         return RestResponse(serializer.data)
+    raise UnSupportMethodException('不支持的HTTP请求')
+
+
+@api_view(['GET', 'POST'])
+def list_constant(request):
+    if request.method == 'GET':
+        constant = Constant.objects.all()
+        serializer = ConstantSerializer(constant, many=True)
+        return Response(serializer.data)
     raise UnSupportMethodException('不支持的HTTP请求')
