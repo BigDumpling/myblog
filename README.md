@@ -10,3 +10,12 @@ virtualenv venv -p python3
 
 4. 启用虚拟环境
 source venv/bin/activate
+
+5. 生成迁移文件：
+python manage.py makemigrations appname
+
+6. 同步到数据库中：
+python manage.py migrate appname filename
+
+7. 数据库逆向到Model:
+python manage.py inspectdb
